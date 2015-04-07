@@ -1,0 +1,8 @@
+{
+    "me.apla.cordova.app-preferences": {
+        "source": {
+            "type": "registry",
+            "id": "me.apla.cordova.app-preferences"
+        }
+    }
+}
