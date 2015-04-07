@@ -1,6 +1,6 @@
 
 var socket;
-var server;
+var server="http://infinite-dusk-7803.herokuapp.com";
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -11,8 +11,6 @@ function onDeviceReady() {
     destinationType = navigator.camera.DestinationType;
 }
 $(document).ready(function() {
-    var val  = window.prompt("Please enter the url of the server?");
-    server = val;
     socket = io(server);
     $("#click").click(function() {
         navigator.camera.getPicture(Upload, onFail, {
