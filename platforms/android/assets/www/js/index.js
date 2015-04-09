@@ -1,5 +1,6 @@
 
 var socket;
+var id;
 var server="http://infinite-dusk-7803.herokuapp.com";
 
 document.addEventListener("deviceready", onDeviceReady, false);
@@ -9,17 +10,24 @@ document.addEventListener("deviceready", onDeviceReady, false);
 function onDeviceReady() {
     pictureSource = navigator.camera.PictureSourceType;
     destinationType = navigator.camera.DestinationType;
+    Direction = navigator.camera.Direction;
 }
 $(document).ready(function() {
     socket = io(server);
+    socket.on('connect',function(){
+        id = socket.io.engine.id;
+    });
+
     $("#click").click(function() {
         navigator.camera.getPicture(Upload, onFail, {
-            quality: 30,
+            quality: 100,
+            cameraDirection:Direction.FRONT,
             destinationType: destinationType.FILE_URI,
-            targetWidth: 512,
-            targetHeight: 620
+            targetWidth: 720,
+            targetHeight: 1280
         });
     });
+
     $("#return").click(function() {
         $("#ButtonHold").show();
         $("#ImageHold").hide();
@@ -35,6 +43,11 @@ function Upload(fileURL) {
     $("#ImageHold").show();
 
     var win = function(r) {
+        $.ajax({
+            url:server + "/runpy?id=" + id,
+            type:"GET",
+            success:alertDismissed
+        });
         console.log("Code = " + r.responseCode);
         console.log("Response = " + r.response);
         console.log("Sent = " + r.bytesSent);
