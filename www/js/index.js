@@ -2,6 +2,7 @@
 var socket;
 var id;
 var server="http://infinite-dusk-7803.herokuapp.com";
+var networkState;
 
 document.addEventListener("deviceready", onDeviceReady, false);
 
@@ -11,6 +12,7 @@ function onDeviceReady() {
     pictureSource = navigator.camera.PictureSourceType;
     destinationType = navigator.camera.DestinationType;
     Direction = navigator.camera.Direction;
+    networkState = navigator.connection.type;
 }
 $(document).ready(function() {
     socket = io(server);
@@ -19,13 +21,23 @@ $(document).ready(function() {
     });
 
     $("#click").click(function() {
+        if(networkState == "3g" || networkState == "wifi")
+        {
         navigator.camera.getPicture(Upload, onFail, {
             quality: 100,
             cameraDirection:Direction.FRONT,
-            destinationType: destinationType.FILE_URI,
-            targetWidth: 720,
-            targetHeight: 1280
+            destinationType: destinationType.FILE_URI
         });
+    }
+    else{
+        navigator.camera.getPicture(Upload, onFail, {
+            quality: 70,
+            cameraDirection:Direction.FRONT,
+            destinationType: destinationType.FILE_URI,
+            targetWidth: 960,
+            targetHeight: 1280    
+        });        
+    }
     });
 
     $("#return").click(function() {

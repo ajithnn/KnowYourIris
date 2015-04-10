@@ -35,6 +35,10 @@
                         {
                             "xml": "<feature name=\"AppPreferences\"><param name=\"android-package\" value=\"me.apla.cordova.AppPreferences\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NetworkStatus\"><param name=\"android-package\" value=\"org.apache.cordova.networkinformation.NetworkManager\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -45,6 +49,10 @@
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
                             "count": 3
+                        },
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
+                            "count": 1
                         }
                     ],
                     "/manifest": [
@@ -77,6 +85,9 @@
             "PACKAGE_NAME": "com.target.Photo"
         },
         "me.apla.cordova.app-preferences": {
+            "PACKAGE_NAME": "com.target.Photo"
+        },
+        "org.apache.cordova.network-information": {
             "PACKAGE_NAME": "com.target.Photo"
         }
     },
